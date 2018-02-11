@@ -1,0 +1,155 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <link rel="stylesheet" href="lib/bootstrap-3.3.7-dist/css/bootstrap.min.css">
+    <link rel="stylesheet" href="css/app.css">
+</head>
+<body>
+
+<div id="app">
+    <div id="main">
+        <div id="head">
+            <h1 v-html="title"></h1>
+        </div>
+        <div id="preview">
+            <div id="previewBg"></div>
+            <div id="previewHead">
+                <div class="upload pull-left">
+                    <label for="icon">
+                        <div class="icon upload-btn-thumb"
+                             v-bind:class="{'icon-group-live': group.totalCount>500, one: group.totalCount==1000, two: group.totalCount==2000}"
+                             v-bind:style="{'background-image': 'url('+ group.icon +')'}">
+                        </div>
+                    </label>
+                    <input type="file" name="icon" id="icon" accept="image/*" class="upload-input" v-on:change="changeGroupIcon">
+                </div>
+                <div class="title" contenteditable="true"
+                    v-html="group.name"
+                    v-on:blur="chagneGroupName">
+                </div>
+            </div>
+            <div id="previewBody">
+                <div id="msg">
+                    <div class="msg-list-warp" v-cloak>
+                        <div class="msg-list-inner" id="msgListInner">
+                            <ul class="msg-list" id="msgList" v-show="messages.length"  v-cloak>
+                                <li v-for="msg in messages">
+                                    <div class="msg-list-head">
+                                        <span>{{ msg.nickname }}</span>(<span class="fcLightBlue">{{  msg.qqnumber}}</span>)<span>{{ msg.sendtime }}</span>
+                                    </div>
+                                    <div class="msg-list-body">
+                                        {{ msg.content }}
+                                    </div>
+                                </li>
+                            </ul>
+                        </div>
+                        <span class="btn-backtop" id="btnBackTop"></span>
+                        <span class="btn-tobottom" id="btnToBottom"></span>
+                    </div>
+                    <div id="msgSend">
+                        <div id="message" contenteditable="true"></div>
+                        <div class="btn-warp">
+                            <button class="btn-close">关闭(<span class="ftUnderline">C</span>)</button>
+                            <button class="btn-send" v-on:click="sendMessage">发送(<span class="ftUnderline">S</span>)</button>
+                        </div>
+                    </div>
+                </div>
+                <div id="note"
+                    :class="{bg: !notes.show || !notes.data.length}"
+                >
+                    <ul class="note-list" v-if="notes.show && notes.data.length" v-cloak>
+                        <li v-for="note in notes.data">
+                            <span class="type">【{{ note.types }}】</span>{{ note.title }}
+                        </li>
+                    </ul>
+                </div>
+                <div id="member">
+                    <div class="member-head">
+                        <span class="fs14 fcBlack" v-cloak>{{  group.lineCount }}/{{  group.totalCount }}</span>
+                    </div>
+                    <div class="member-body">
+                        <ul class="member-list" v-cloak>
+                            <li v-model="members" v-for="member in members">
+                                <div class="member-list-avatar"
+                                     v-bind:style="{'background-image': 'url('+ member.avatar +')'}">
+                                </div>
+                                <div class="member-list-name"
+                                     :class = "{vip: member.status.vip>0}">
+                                    {{ member.nickname +'('+ member.number +')' }}
+                                </div>
+                                <div class="member-list-status" v-if="member.status.show">
+                                    <span class="icon icon-edit" v-if="member.status.self"></span>
+                                    <span class="icon icon-qunzhu" v-if="member.status.qunzhu"
+                                         :class = "{qzone:member.status.qzone}">
+                                    </span>
+                                    <span class="icon icon-guanliyuan" v-if="member.status.guanliyuan"
+                                         :class = "{qzone:member.status.qzone}">
+                                    </span>
+                                    <span class="icon icon-qzone" v-if="!member.status.qunzhu && !member.status.guanliyuan && member.status.qzone"></span>
+                                </div>
+                            </li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div id="tools">
+            <div class="tool-unit">
+                <div class="form-group">
+                    <label for="groupMemberLineCount">群成员</label>
+                    <div class="row">
+                        <div class="col-xs-6">
+                            <input type="number" class="form-control input-sm" id="groupMemberLineCount" name="groupMemberLineCount" placeholder="在线数" v-model="group.lineCount" v-on:change="chagneGroupCount('line')">
+                        </div>
+                        <div class="col-xs-6">
+                            <input type="number" class="form-control input-sm" id="groupMemberTotalCount" name="groupMemberTotalCount" placeholder="总数" v-model="group.totalCount" v-on:change="chagneGroupCount('total')">
+                        </div>
+                    </div>
+                </div>
+                <hr>
+                <div class="form-group">
+                    <label for="qqnumber">QQ号</label>
+                    <input type="number" class="form-control input-sm" id="qqnumber" name="qqnumber" placeholder="QQ号码" v-model="user.number">
+                </div>
+                <div class="form-group">
+                    <label for="nickname">QQ昵称</label>
+                    <input type="text" class="form-control input-sm" id="nickname" name="nickname" placeholder="QQ昵称" v-model="user.nickname">
+                </div>
+                <div class="form-group">
+                    <label for="avatar">QQ头像</label>
+                    <input type="file" id="avatar" name="avatar">
+                </div>
+                <hr>
+                <div class="form-group">
+                    <label for="avatar">群通知</label>
+                    <div class="btn-group" data-toggle="buttons" style="display: block;overflow:hidden;">
+                        <label class="btn btn-info btn-sm"
+                                v-bind:class="{active: notes.show}" v-on:click="setNotesShow(0)">
+                            <input type="radio" name="options" id="option1" autocomplete="off" checked>开启
+                        </label>
+                        <label class="btn btn-info btn-sm"
+                                v-bind:class="{active: !notes.show}" v-on:click="setNotesShow(1)">
+                            <input type="radio" name="options" id="option2" autocomplete="off">关闭
+                        </label>
+                    </div>
+                </div>
+                <hr>
+                <div class="form-group">
+                    <button type="button" class="btn btn-default" v-on:click="generateApp">生成界面</button>
+                    <button type="button" class="btn btn-success" v-on:click="saveImage">保存图片</button>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<script src="lib/vue.js"></script>
+<script src="lib/bootstrap-3.3.7-dist/js/jquery.min.js"></script>
+<script src="lib/bootstrap-3.3.7-dist/js/bootstrap.min.js"></script>
+<script src="lib/html2canvas.min.js"></script>
+<script src="lib/canvas2image.js"></script>
+<script src="js/app.js"></script>
+</body>
+</html>

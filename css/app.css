@@ -1,0 +1,422 @@
+
+h1{
+    margin: 0;
+    font-size: 18px;
+}
+ul{
+    margin: 0;
+    padding: 0;
+}
+ul li{
+    list-style-type: none;
+}
+::-webkit-scrollbar {
+    display: none;
+}
+
+.fs12{
+    font-size: 12px;
+}
+.fs14{
+    font-size: 14px;
+}
+.fcBlack{
+    color: #000;
+}
+.fcLightBlue{
+    color: #0072cb;
+}
+.ftUnderline{
+    text-decoration: underline;
+}
+
+.text-right{
+    text-align: right;
+}
+
+[v-cloak]{
+    display: none;
+}
+
+.upload{
+
+}
+.upload .upload-btn-thumb{
+
+}
+.upload .upload-input{
+    display: none;
+}
+
+#main{
+    width: 828px;
+    margin: 0 auto;
+    position: relative;
+}
+#head{
+    margin-bottom: 10px;
+    padding: 15px 0 10px;
+    border-bottom: 1px dashed #e6e6e6;
+    font-family: "Microsoft YaHei";
+}
+
+#searchBar{
+    margin-bottom: 5px;
+}
+
+#preview{
+    position: relative;
+    overflow: hidden;
+}
+#previewBg{
+    width: 828px;
+    height: 788px;
+    background: url("imgs/bg.jpg") no-repeat;
+}
+#previewHead{
+    position: absolute;
+    top: 13px;
+    left: 13px;
+    right: 0;
+}
+#previewHead .icon{
+    width: 30px;
+    height: 30px;
+    background-size: 30px 30px;
+    background-repeat: no-repeat;
+    border-radius: 100%;
+    position: relative;
+}
+
+#previewHead .icon-group-live:after{
+    width: 10px;
+    height: 9px;
+    content: '';
+    display: block;
+    background: url("imgs/icon_group_live.png") no-repeat;
+    position: absolute;
+    bottom: 0;
+    left: 0;
+}
+#previewHead .icon-group-live.one:after{
+    background-position: 0 0;
+}
+#previewHead .icon-group-live.two:after{
+    background-position: 0 -9px;
+}
+#previewHead .title{
+    margin: 0 0 0 7px;
+    font-family: "Microsoft YaHei";
+    font-size: 17px;
+    line-height: 30px;
+    color: #000;
+    font-weight: 500;
+    display: inline-block;
+}
+#previewBody{
+    position: absolute;
+    top: 85px;
+    bottom: 0;
+    left: 0;
+    right: 199px;
+}
+#previewBody #msg{
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 2px;
+    bottom: 0;
+}
+#previewBody #msg .msg-list-warp{
+    position: absolute;
+    top: 0;
+    left: 1px;
+    right: 0;
+    bottom: 121px;
+    overflow: hidden;
+}
+#previewBody #msg .msg-list-warp .btn-backtop,
+#previewBody #msg .msg-list-warp .btn-tobottom{
+    width: 12px;
+    height: 7px;
+    background: url("imgs/icon_top_bottom.png") no-repeat;
+    background-size: 100%;
+    position: absolute;
+    display: none;
+}
+#previewBody #msg .msg-list-warp .btn-backtop{
+    background-position: 0 0;
+    top: 4px;
+    right: 0;
+}
+#previewBody #msg .msg-list-warp .btn-tobottom{
+    background-position: 0 -7px;
+    right: 0;
+    bottom: 4px;
+}
+#previewBody #msg .msg-list-inner{
+    overflow-y: scroll;
+    position: absolute;
+    top: 0;
+    bottom: 0;
+}
+#previewBody #msg #msgList{
+    padding: 0 10px;
+    overflow-y: scroll;
+}
+#previewBody #msg .msg-list li{
+    font-size: 12px;
+    line-height: 24px;
+}
+#previewBody #msg .msg-list .msg-list-head{
+    color: blue;
+}
+#previewBody #msg .msg-list .msg-list-body{
+    padding-left: 20px;
+    word-break: break-all;
+    word-wrap: break-word;
+}
+#previewBody #msg #msgSend{
+    position: absolute;
+    height: 90px;
+    left: 1px;
+    right: 0;
+    bottom: 0;
+}
+#previewBody #msg #msgSend #message{
+    height: 50px;
+    padding: 5px;
+    background-color: #fafafa;
+    outline: none;
+    overflow: hidden;
+    position: absolute;
+    left: 0;
+    right: 0;
+    bottom: 39px;
+}
+#previewBody #msg #msgSend .btn-warp{
+    padding-right: 12px;
+    text-align: right;
+    position: absolute;
+    left: 0;
+    right: 0;
+    bottom: 14px;
+}
+#previewBody #msg #msgSend .btn-close{
+    width: 70px;
+    height: 24px;
+    padding: 0;
+    background-color: #fafafa;
+    font-size: 12px;
+    line-height: 24px;
+    color: #000;
+    text-align: center;
+    border: none;
+    border-radius: 3px;
+    outline: none;
+    user-select: none;
+}
+#previewBody #msg #msgSend .btn-send{
+    width: 88px;
+    height: 24px;
+    padding: 0 26px 0 0;
+    background-color: #fafafa;
+    font-size: 12px;
+    line-height: 24px;
+    color: #000;
+    text-align: center;
+    border: none;
+    border-radius: 3px;
+    position: relative;
+    outline: none;
+    cursor: pointer;
+    user-select: none;
+}
+#previewBody #msg #msgSend .btn-send:after{
+    width: 0;
+    height: 0;
+    content: '';
+    border-width: 4px 3px 0 3px;
+    border-color: #7d7d7d transparent transparent transparent;
+    border-style: solid;
+    position: absolute;
+    top: 10px;
+    right: 10px;
+}
+#previewBody #note{
+    width: 199px;
+    height: 138px;
+    position: absolute;
+    top: 23px;
+    right: -198px;
+}
+#previewBody #note.bg{
+    background: url("imgs/bg_note.png") no-repeat;
+    background-position: left center;
+}
+#previewBody .note-list li{
+    padding: 0 1px 0 4px;
+    height: 28px;
+    line-height: 28px;
+    font-size: 12px;
+    color: #999;
+    white-space: nowrap;
+    text-overflow: ellipsis;
+    overflow: hidden;
+}
+#previewBody .note-list li .type{
+    color: #666
+}
+#previewBody #member{
+    width: 199px;
+    position: absolute;
+    right: -199px;
+    bottom: 1px;
+    top: 259px;
+    overflow: hidden;
+}
+#previewBody #member .member-head{
+    position: absolute;
+    top: 5px;
+    left: 59px;
+    right: 0;
+    z-index: 1;
+}
+#previewBody #member .member-body{
+    position: absolute;
+    right: 13px;
+    left: 12px;
+    bottom: 1px;
+    top: 25px;
+    z-index: 1;
+}
+
+.member-list li{
+    margin-top: 8px;
+    position: relative;
+}
+.member-list .member-list-avatar{
+    width: 20px;
+    height: 20px;
+    border-radius: 100%;
+    background-repeat: no-repeat;
+    background-size: 100%;
+    float: left;
+    position: relative;
+}
+.member-list .member-list-avatar.mobile_online:after{
+    width: 8px;
+    height: 10px;
+    content: '';
+    background: url("imgs/icon_mobile.png") no-repeat;
+    position: absolute;
+    bottom: 0;
+    right: 0;
+}
+.member-list .member-list-name{
+    height: 20px;
+    margin-left: 26px;
+    margin-right: 22px;
+    font-size: 13px;
+    line-height: 20px;
+    color: #000;
+    white-space: nowrap;
+    overflow: hidden;
+    position: relative;
+}
+.member-list .member-list-name.vip{
+    color: #fe0000;
+}
+.member-list .member-list-name:after{
+    width: 0;
+    height: 20px;
+    content: '';
+    box-shadow: -8px 0 44px 24px #fafafa;
+    position: absolute;
+    top: 0;
+    right: 0;
+}
+.member-list .member-list-status{
+    height: 16px;
+    overflow: hidden;
+    position: absolute;
+    top: 4px;
+    right: 0;
+}
+.member-list .member-list-status .icon{
+    margin-right: 7px;
+}
+.member-list .member-list-status .icon:last-child{
+    margin-right: 0;
+}
+.icon-qunzhu{
+    width: 16px;
+    height: 16px;
+    background: url("imgs/icon_qunzhu.png") no-repeat;
+    float: left;
+    position: relative;
+}
+.icon-guanliyuan{
+    width: 16px;
+    height: 16px;
+    background: url("imgs/icon_guanliyuan.png") no-repeat;
+    float: left;
+    position: relative;
+}
+.icon-qunzhu.qzone:after,
+.icon-guanliyuan.qzone:after{
+    width: 11px;
+    height: 11px;
+    content: '';
+    background: url("imgs/icon_qzone_min.png") no-repeat;
+    position: absolute;
+    bottom: 0;
+    right: 0;
+    z-index: 3;
+}
+.icon-edit{
+    width: 16px;
+    height: 16px;
+    background: url("imgs/icon_edit.png") no-repeat;
+    background-position-y: 2px;
+    float: left;
+}
+.icon-qzone{
+    width: 16px;
+    height: 16px;
+    background: url("imgs/icon_qzone.png") no-repeat;
+    float: left;
+}
+
+/* tools */
+#tools{
+    width: 230px;
+    padding-left: 15px;
+    position: absolute;
+    top: 55px;
+    right: -230px;
+}
+#tools .tool-unit{
+    margin-bottom: 10px;
+}
+.btn-saveimg{
+    border: none;
+    background-color: #007acc;
+    color: #fff;
+    padding: 5px 10px;
+    border-radius: 3px;
+    cursor: pointer;
+}
+
+.alert{
+    transform: translate(0, -50%);
+    transition: transform .3s ease-out;
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    z-index: 9;
+}
+.alert.in{
+    transform: translate(0, 0);
+}
