@@ -307,24 +307,42 @@ var app = new Vue({
     el: '#app',
     data: appStroe.getStroe(),
     watch: {
-        user: function (val, oldVal) {
-            console.log(val,oldVal);
+        user: {
+            handler: function (newVal, oldVal) {
+                if(newVal){
+                    appStroe.updateStroe();
+                }
+            },
+            deep: true
         },
-        group: function (val, oldVal) {
-            console.log(val,oldVal);
+        group: {
+            handler: function (newVal, oldVal) {
+                if(newVal){
+                    appStroe.updateStroe();
+                }
+            },
+            deep: true
         },
-/*        members: function (val, oldVal) {
-            console.log(val,oldVal);
-        },*/
-        messages: function (val, oldVal) {
-            console.log(val,oldVal);
-        },
-        notes: {
-            handler: function (val, oldVal) {
-                console.log(val,oldVal);
+        members: {
+            handler: function (newVal, oldVal) {
+                if(newVal){
+                    appStroe.updateStroe();
+                }
             }
         },
-        deep:true
+        messages: function (newVal, oldVal) {
+            if(newVal){
+                appStroe.updateStroe();
+            }
+        },
+        notes: {
+            handler: function (newVal, oldVal) {
+                if(newVal){
+                    appStroe.updateStroe();
+                }
+            },
+            deep:true
+        }
     },
     mounted: function(){
         document.title = this.title;
@@ -521,14 +539,12 @@ var app = new Vue({
         alert: function(msg, type){
             // type: success, info, warning, danger
             var oMain = document.querySelector('#main');
-
-            if(document.querySelector('#alert')){
-                oMain.removeChild(document.querySelector('#alert'));
-            }
+            var iIndex = 10 + document.querySelectorAll('.alert').length;
 
             var oAlert = document.createElement('div');
                 oAlert.id = 'alert';
                 oAlert.className = 'alert fade in alert-'+ type;
+                oAlert.style.zIndex = iIndex;
                 oAlert.setAttribute('role', 'alert');
 /*                oAlert.innerHTML = '<button type="button" class="close" data-dismiss="alert" aria-label="Close">\n' +
                     '  <span aria-hidden="true">&times;</span>\n' +
@@ -538,10 +554,10 @@ var app = new Vue({
             oMain.insertBefore(oAlert, oMain.childNodes[0]);
 
             var timer = setTimeout(function(){
-                if(document.querySelector('#alert')){
+                if(oAlert){
                     oMain.removeChild(oAlert);
                 }
-            },1000);
+            },1500);
         },
         getGTK: function (){
             var pSkey = 'u5psA6G*uWZxo0oyCcgeHLFJ6kWGGSwZoDzMShPcAKk_';
