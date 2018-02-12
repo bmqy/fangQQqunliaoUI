@@ -37,7 +37,7 @@
                             <ul class="msg-list" id="msgList" v-show="messages.length"  v-cloak>
                                 <li v-for="msg in messages">
                                     <div class="msg-list-head">
-                                        <span>{{ msg.nickname }}</span>(<span class="fcLightBlue">{{  msg.qqnumber}}</span>)<span>{{ msg.sendtime }}</span>
+                                        <span>{{ msg.nickname }}</span>(<span class="fcLightBlue">{{  msg.number}}</span>)<span>{{ msg.sendtime }}</span>
                                     </div>
                                     <div class="msg-list-body">
                                         {{ msg.content }}
@@ -127,11 +127,11 @@
                     <div class="btn-group" data-toggle="buttons" style="display: block;overflow:hidden;">
                         <label class="btn btn-info btn-sm"
                                 v-bind:class="{active: notes.show}" v-on:click="setNotesShow(0)">
-                            <input type="radio" name="options" id="option1" autocomplete="off" checked>开启
+                            <input type="radio" name="notesShow" v-model="notes.show">开启
                         </label>
                         <label class="btn btn-info btn-sm"
                                 v-bind:class="{active: !notes.show}" v-on:click="setNotesShow(1)">
-                            <input type="radio" name="options" id="option2" autocomplete="off">关闭
+                            <input type="radio" name="notesShow" v-model="notes.show">关闭
                         </label>
                     </div>
                 </div>
@@ -139,6 +139,7 @@
                 <div class="form-group">
                     <button type="button" class="btn btn-default" v-on:click="generateApp">生成界面</button>
                     <button type="button" class="btn btn-success" v-on:click="saveImage">保存图片</button>
+                    <button type="button" class="btn btn-danger" v-on:click="resetApp">重置默认</button>
                 </div>
             </div>
         </div>

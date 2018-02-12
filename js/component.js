@@ -1,10 +1,11 @@
-Vue.component('msglist', {
-    template: '<li>'+
-    '<div class="msg-list-head">\n'+
-    '<span>'+ sQQName +'</span>(<span class="fcLightBlue">'+ sQQNumber +'</span>)<span>'+ sTimes +'</span>'+
-    '</div>\n'+
-    '<div class="msg-list-body">\n'+ oMessage.innerHTML +'</div>\n'+
+Vue.component('members', {
+    template: '<li>' +
+    '<div class="member-list-avatar" style="background-image: url(&quot;css/imgs/avatar.png&quot;);"></div>' +
+    '<div class="member-list-name vip">{{ member.nickname }}</div>' +
+    '<div class="member-list-status">' +
+    '<span class="icon icon-qunzhu qzone"></span>' +
+    '</div>' +
     '</li>',
-    props: ['value'],
+    props: ['members'],
     methods: {}
 });

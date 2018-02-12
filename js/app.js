@@ -306,6 +306,26 @@ var appStroe = {
 var app = new Vue({
     el: '#app',
     data: appStroe.getStroe(),
+    watch: {
+        user: function (val, oldVal) {
+            console.log(val,oldVal);
+        },
+        group: function (val, oldVal) {
+            console.log(val,oldVal);
+        },
+/*        members: function (val, oldVal) {
+            console.log(val,oldVal);
+        },*/
+        messages: function (val, oldVal) {
+            console.log(val,oldVal);
+        },
+        notes: {
+            handler: function (val, oldVal) {
+                console.log(val,oldVal);
+            }
+        },
+        deep:true
+    },
     mounted: function(){
         document.title = this.title;
 
@@ -335,9 +355,7 @@ var app = new Vue({
     },
     methods: {
         chagneGroupName: function (e) {
-            console.log(e);
             this.group.name = e.target.innerHTML;
-            appStroe.updateStroe();
         },
         changeGroupIcon: function (e) {
             var _this = this;
@@ -346,7 +364,6 @@ var app = new Vue({
             r.readAsDataURL(file);
             r.onload = function(){
                 _this.group.icon = r.result;
-                appStroe.updateStroe();
             };
         },
         chagneGroupCount: function (type) {
@@ -385,7 +402,6 @@ var app = new Vue({
                     this.group.lineCount = this.group.totalCount;
                 }
             }
-            appStroe.updateStroe();
         },
         getGroupNote: function (groupNumber) {
             // qid: 群号码;
@@ -412,7 +428,9 @@ var app = new Vue({
                                 oItem['status']['vip'] = (_data[i]['age']%23 == 0);
                             }
                         }
-                        aArr.push(oItem);
+                        if(oItem['nickname'] && oItem['number']){
+                            aArr.push(oItem);
+                        }
                     }
                     _this.members = aArr;
                 },
@@ -438,7 +456,6 @@ var app = new Vue({
 
                 console.log(this.messages);
                 oMessage.innerHTML = '';
-                appStroe.updateStroe();
             }
             else{
                 var aColor = ['rgb(250,233,233)','rgb(250,199,199)','rgb(250,216,216)','rgb(250,199,199)','rgb(250,250,250)'];
@@ -463,11 +480,14 @@ var app = new Vue({
                 this.notes.show = true;
                 this.alert('开启群通知！', 'success');
             }
-            appStroe.updateStroe();
         },
         generateApp: function(){
             this.getMemberList();
-            console.log('程程界面');
+            console.log('已更新');
+        },
+        resetApp: function(){
+            this.data = Defalut;
+            console.log('已重置');
         },
         saveImage: function () {
             var oPreview = document.querySelector('#preview');

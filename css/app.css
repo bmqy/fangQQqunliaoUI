@@ -52,6 +52,7 @@ ul li{
     width: 828px;
     margin: 0 auto;
     position: relative;
+    transform: translateX(-115px);
 }
 #head{
     margin-bottom: 10px;
